@@ -5,13 +5,13 @@ def gaussian_derivative(t, sigma, amplitude):
     return - (t / sigma ** 2) * np.exp(-t ** 2 / (2 * sigma ** 2)) * amplitude
 
 def noise(signal):
-    noise_std = 0.005
     noise = np.zeros_like(signal)
-    num_noise_intervals = np.random.randint(100, 500)
-    for _ in range(num_noise_intervals):
-        noise_window_size = np.random.randint(10, 20)
-        start = np.random.randint(0, len(signal) - noise_window_size)
-        noise[start:start + noise_window_size] = np.random.normal(0, noise_std, size=noise_window_size)
+    num_intervals = np.random.randint(200, 500)
+    for _ in range(num_intervals):
+        std = np.random.uniform(0.03, 0.05)
+        window_size = np.random.randint(10, 20)
+        start = np.random.randint(0, len(signal) - window_size)
+        noise[start:start + window_size] = np.random.normal(0, std, size=window_size)
     return noise
 
 def synthesis_emg(duration, start_time, num_peaks):
